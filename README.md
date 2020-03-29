@@ -10,4 +10,4 @@ Clone this repo and run command
 
 ## Sceenshot
 <img src="https://raw.githubusercontent.com/mahiznan/weather/master/screens/screen1.jpeg" width="30%" height="30%">
-<img src="https://raw.githubusercontent.com/mahiznan/weather/master/screens/screen2.jpeg" width="30%" height="30%">
+<img src="https://github.com/mahiznan/weather/blob/master/screens/screen2.jpg" width="30%" height="30%">
