@@ -4,8 +4,9 @@ A simple flutter application to display current weather
 
 ## Getting Started
 
-Clone this repo and run
+Clone this repo and run command
 
 `flutter run`
 
-![Image description](https://user-images.githubusercontent.com/9766310/36504143-7796099e-178a-11e8-90df-5a1ed43a65b3.png)
+## Sceenshot
+<img src="https://raw.githubusercontent.com/mahiznan/weather/master/screens/screen1.jpeg" width="30%" height="30%">
