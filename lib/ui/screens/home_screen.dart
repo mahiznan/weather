@@ -5,30 +5,87 @@ import 'package:weather/core/model/weather_forecast.dart';
 import 'package:weather/ui/providers/weather_provider.dart';
 import 'package:weather/ui/util.dart';
 import 'package:weather/ui/widgets/forecast_widget.dart';
-import 'package:weather_icons/weather_icons.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: Container(
+          padding: const EdgeInsets.only(top: 30),
+          color: Colors.transparent,
+          child: Container(
+              padding: const EdgeInsets.only(top: 70),
+              decoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.horizontal(left: Radius.circular(70)),
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.orange[900],
+                    Colors.orange[700],
+                    Colors.orange[500]
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+              width: 60,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  IconButton(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    icon: Icon(
+                      Icons.dashboard,
+                      color: Colors.white,
+                      size: 32,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  IconButton(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    icon: Icon(
+                      Icons.bookmark,
+                      color: Colors.white,
+                      size: 32,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  IconButton(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    icon: Icon(
+                      Icons.build,
+                      color: Colors.white,
+                      size: 32,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  IconButton(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    icon: Icon(
+                      Icons.shopping_cart,
+                      color: Colors.white,
+                      size: 32,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ))),
       appBar: AppBar(
         backgroundColor: Colors.orange[500],
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: Icon(
-              Icons.menu,
-              color: Colors.grey[800],
-              size: 30,
-            ),
-          ),
-        ],
+        iconTheme: new IconThemeData(color: Colors.grey[800]),
         leading: Padding(
           padding: const EdgeInsets.only(left: 16.0),
           child: IconButton(
             icon: Icon(
               Icons.search,
-              color: Colors.grey[800],
               size: 30,
             ),
             onPressed: () {
@@ -65,7 +122,8 @@ class HomeScreen extends StatelessWidget {
                               color: Colors.transparent,
                             ),
                             Text(
-                              weatherCodeEnumValues.reverse[weather.weather[0].code],
+                              weatherCodeEnumValues
+                                  .reverse[weather.weather[0].code],
                               style:
                                   TextStyle(color: Colors.white, fontSize: 36),
                             ),
@@ -92,10 +150,10 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 8.0),
-                                  child: Icon(
-                                    WeatherIcons.degrees,
-                                    color: Colors.white,
-                                    size: 40,
+                                  child: Text(
+                                    '\u00B0',
+                                    style: TextStyle(
+                                        fontSize: 40, color: Colors.white),
                                   ),
                                 ),
                               ],
