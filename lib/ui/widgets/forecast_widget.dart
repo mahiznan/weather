@@ -36,8 +36,8 @@ class ForecastWidget extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: [Colors.orange[400], Colors.orange[900]],
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft),
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter),
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(

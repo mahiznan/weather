@@ -35,9 +35,13 @@ class HomeScreen extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.orange[600], Colors.orange[900]],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            colors: [
+              Colors.orange[600],
+              Colors.orange[900],
+              Colors.orange[100]
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
         ),
         child: SafeArea(
@@ -47,9 +51,7 @@ class HomeScreen extends StatelessWidget {
               ForecastWeather weather = weatherProvider.forecastWeather;
               return weatherProvider.loading
                   ? Center(
-                      child: CircularProgressIndicator(
-                        backgroundColor: Colors.white,
-                      ),
+                      child: CircularProgressIndicator(),
                     )
                   : Column(
                       children: [
@@ -98,6 +100,13 @@ class HomeScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Colors.white, Colors.orange[400]],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                            ),
                             child: ForecastWidgetList(
                               forecastWeather: weatherProvider.forecastWeather,
                             ),

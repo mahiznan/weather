@@ -13,8 +13,8 @@ class AppMenuDrawer extends StatelessWidget {
           gradient: LinearGradient(
             colors: [
               Colors.orange[900],
-              Colors.orange[700],
-              Colors.orange[400],
+              Colors.orange[500],
+              Colors.orange[300],
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,

@@ -9,7 +9,7 @@ class WeatherProvider with ChangeNotifier {
   ApiService apiService;
   WeatherProvider() {
     apiService = ApiService();
-    fetchForecastWeather(44418);
+    fetchForecastWeather(2295424);
   }
 
   void fetchForecastWeather(int cityId) async {

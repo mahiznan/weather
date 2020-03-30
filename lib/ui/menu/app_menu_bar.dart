@@ -49,18 +49,28 @@ class DataSearch extends SearchDelegate<String> {
                 end: Alignment.bottomRight),
           ),
           child: ListView.builder(
-            itemBuilder: (context, index) => ListTile(
-              leading: Icon(Icons.location_city),
-              title: Text(
-                cities[index].title,
-                style: TextStyle(fontSize: 18),
+            itemBuilder: (context, index) => Card(
+              color: Colors.transparent,
+              child: ListTile(
+                leading: Icon(
+                  Icons.location_on,
+                  color: Colors.orange[200],
+                  size: 32,
+                ),
+                title: Text(
+                  cities[index].title,
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+                subtitle: Text(
+                  cities[index].lattLong,
+                  style: TextStyle(color: Colors.black54),
+                ),
+                onTap: () {
+                  Provider.of<WeatherProvider>(context, listen: false)
+                      .fetchForecastWeather(cities[index].woeid);
+                  close(context, null);
+                },
               ),
-              subtitle: Text(cities[index].lattLong),
-              onTap: () {
-                Provider.of<WeatherProvider>(context, listen: false)
-                    .fetchForecastWeather(cities[index].woeid);
-                close(context, null);
-              },
             ),
             itemCount: cities != null ? cities.length : 0,
           ),
