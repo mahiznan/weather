@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:weather/core/model/weather_forecast.dart';
+import 'package:weather/core/model/forecast_weather.dart';
 import 'package:weather/ui/providers/weather_provider.dart';
 import 'package:weather/ui/util.dart';
 import 'package:weather/ui/widgets/forecast_widget.dart';
@@ -113,7 +114,7 @@ class HomeScreen extends StatelessWidget {
                 child: Center(child: Consumer<WeatherProvider>(builder:
                     (BuildContext context, WeatherProvider weatherProvider,
                         Widget child) {
-                  CurrentWeather weather = weatherProvider.currentWeather;
+                  ForecastWeather weather = weatherProvider.forecastWeather;
                   return (weatherProvider.loading
                       ? CircularProgressIndicator()
                       : Column(
@@ -123,27 +124,27 @@ class HomeScreen extends StatelessWidget {
                               color: Colors.transparent,
                             ),
                             Text(
-                              weatherCodeEnumValues
-                                  .reverse[weather.weather[0].code],
+                              weather.consolidatedWeather[0].weatherStateName,
                               style:
                                   TextStyle(color: Colors.white, fontSize: 36),
                             ),
                             Text(
-                              weather.name,
+                              weather.title,
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),
-                            Divider(
-                              color: Colors.transparent,
+                            Divider(),
+                            SvgPicture.network(
+                              'https://www.metaweather.com/static/img/weather/${weather.consolidatedWeather[0].weatherStateAbbr}.svg',
+                              height: 90,
+                              color: Colors.white,
                             ),
-                            Image.network(
-                              "http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png",
-                            ),
+                            Divider(),
                             Stack(
                               alignment: Alignment.topRight,
                               children: <Widget>[
                                 Text(
-                                  '${weather.detail.temp}',
+                                  '${weather.consolidatedWeather[0].theTemp}',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 128,
@@ -175,7 +176,7 @@ class HomeScreen extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       Provider.of<WeatherProvider>(context, listen: false)
-                          .fetchCurrentWeather(2643743);
+                          .fetchForecastWeather(2295424);
                     },
                     child: Icon(
                       Icons.refresh,
@@ -287,7 +288,7 @@ class DataSearch extends SearchDelegate<String> {
           ),
           onTap: () {
             Provider.of<WeatherProvider>(context, listen: false)
-                .fetchCurrentWeather(suggestedCities[index].id);
+                .fetchForecastWeather(2295424);
             close(context, null);
           },
         ),

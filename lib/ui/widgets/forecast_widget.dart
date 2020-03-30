@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:weather/core/model/weather_forecast.dart';
+import 'package:weather/core/model/forecast_weather.dart';
 
 class ForecastWidgetList extends StatelessWidget {
   final ForecastWeather forecastWeather;
@@ -14,18 +15,18 @@ class ForecastWidgetList extends StatelessWidget {
         return Container(
           padding: const EdgeInsets.all(12),
           child: ForecastWidget(
-            forecast: forecastWeather.list[index],
+            forecast: forecastWeather.consolidatedWeather[index],
           ),
         );
       },
-      itemCount: forecastWeather.list.length,
+      itemCount: forecastWeather.consolidatedWeather.length,
       scrollDirection: Axis.horizontal,
     );
   }
 }
 
 class ForecastWidget extends StatelessWidget {
-  final Forecast forecast;
+  final ConsolidatedWeather forecast;
 
   const ForecastWidget({Key key, @required this.forecast}) : super(key: key);
   @override
@@ -49,27 +50,33 @@ class ForecastWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Text(
-                DateFormat("E").format(forecast.dtTxt).toUpperCase(),
+                DateFormat("E").format(forecast.applicableDate).toUpperCase(),
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
                     fontWeight: FontWeight.bold),
               ),
+              Divider(),
               Text(
-                DateFormat("dd MMM").format(forecast.dtTxt),
+                DateFormat("dd MMM").format(forecast.applicableDate),
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 12,
                     fontStyle: FontStyle.italic),
               ),
-              Image.network(
-                  "http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"),
+              Divider(),
+              SvgPicture.network(
+                'https://www.metaweather.com/static/img/weather/${forecast.weatherStateAbbr}.svg',
+                height: 50,
+                color: Colors.white,
+              ),
+              Divider(),
               Text(
-                '${weatherCodeEnumValues.reverse[forecast.weather[0].code]}',
+                '${forecast.weatherStateName}',
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24,
-                    fontStyle: FontStyle.italic),
+                    fontSize: 18,
+                    fontStyle: FontStyle.normal),
               ),
             ],
           ),
