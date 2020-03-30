@@ -21,8 +21,8 @@ class HomeScreen extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: [
                     Colors.orange[900],
-                    Colors.orange[100],
-                    Colors.green[900]
+                    Colors.orange[700],
+                    Colors.orange[400],
                   ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -103,9 +103,10 @@ class HomeScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.height * .55,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                  colors: [Colors.orange[500], Colors.orange[900]],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight),
+                colors: [Colors.orange[600], Colors.orange[900]],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
             ),
             child: SafeArea(
               child: SingleChildScrollView(
