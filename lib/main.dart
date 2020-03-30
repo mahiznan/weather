@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather/core/services/api_service.dart';
 import 'package:weather/ui/providers/weather_provider.dart';
 import 'package:weather/ui/screens/home_screen.dart';
 
@@ -9,6 +10,9 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: (_) => WeatherProvider(),
+        ),
+        Provider(
+          create: (_) => ApiService(),
         )
       ],
       child: WeatherApp(),
