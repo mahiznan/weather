@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:weather/core/model/forecast_weather.dart';
-import 'package:weather/ui/menu/app_menu_bar.dart';
 import 'package:weather/ui/menu/app_menu_drawer.dart';
+import 'package:weather/ui/menu/app_search_bar.dart';
 import 'package:weather/ui/providers/weather_provider.dart';
 import 'package:weather/ui/widgets/forecast_widget.dart';
 import 'package:weather/ui/widgets/weather_detail_widget.dart';
@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       endDrawer: AppMenuDrawer(),
       appBar: AppBar(
-        backgroundColor: Colors.orange[500],
+        backgroundColor: Colors.orange[800],
         iconTheme: new IconThemeData(color: Colors.grey[800]),
         leading: Padding(
           padding: const EdgeInsets.only(left: 16.0),
@@ -36,9 +36,8 @@ class HomeScreen extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Colors.orange[600],
               Colors.orange[900],
-              Colors.orange[100]
+              Colors.orange[500],
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,

@@ -1,6 +1,6 @@
 import 'package:weather/core/model/city.dart';
 
-final List<City> suggestedCities = [
+final List<City> suggestedCities1 = [
   City(
       title: 'Chennai',
       woeid: 2295424,
@@ -21,4 +21,9 @@ final List<City> suggestedCities = [
       woeid: 28743736,
       locationType: LocationType.CITY,
       lattLong: '28.643999,77.091003'),
+      City(
+      title: 'Singapore',
+      woeid: 1062617,
+      locationType: LocationType.CITY,
+      lattLong: '1.293780,103.853256')
 ];

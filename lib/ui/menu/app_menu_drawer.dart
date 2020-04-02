@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:weather/core/model/city.dart';
+import 'package:weather/core/services/db_helper.dart';
+import 'package:weather/ui/menu/app_routes.dart';
 
 class AppMenuDrawer extends StatelessWidget {
   @override
@@ -27,12 +31,12 @@ class AppMenuDrawer extends StatelessWidget {
             IconButton(
               padding: const EdgeInsets.symmetric(vertical: 16),
               icon: Icon(
-                Icons.dashboard,
+                Icons.home,
                 color: Colors.white,
                 size: 32,
               ),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.popAndPushNamed(context, AppRoutes.Home);
               },
             ),
             IconButton(
@@ -42,30 +46,22 @@ class AppMenuDrawer extends StatelessWidget {
                 color: Colors.white,
                 size: 32,
               ),
-              onPressed: () {
-                Navigator.of(context).pop();
+              onPressed: () async {
+                List<City> cities =
+                    await Provider.of<DatabaseHelper>(context,listen: false).queryAllRows();
+                Navigator.popAndPushNamed(context, AppRoutes.Bookmark,
+                    arguments: cities);
               },
             ),
             IconButton(
               padding: const EdgeInsets.symmetric(vertical: 16),
               icon: Icon(
-                Icons.build,
+                Icons.help,
                 color: Colors.white,
                 size: 32,
               ),
               onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            IconButton(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.white,
-                size: 32,
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.popAndPushNamed(context, AppRoutes.Sliver);
               },
             ),
           ],
