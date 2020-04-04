@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather/core/model/city.dart';
 import 'package:weather/core/model/forecast_weather.dart';
 import 'package:weather/ui/helper.dart';
 import 'package:weather/ui/providers/weather_provider.dart';
@@ -31,7 +32,13 @@ class DebugScreen extends StatelessWidget {
               children: <Widget>[
                 CustomBorder(
                   child: WeatherDetail(
-                      weather.consolidatedWeather[0], weather.title),
+                      weather.consolidatedWeather[0],
+                      City(
+                          woeid: weather.woeid,
+                          title: weather.title,
+                          locationType:
+                              locationTypeValues.map[weather.locationType],
+                          lattLong: weather.lattLong)),
                 ),
                 CustomBorder(
                   child: WindWidget(

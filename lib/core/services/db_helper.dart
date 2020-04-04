@@ -68,10 +68,10 @@ class DatabaseHelper {
     return -1;
   }
 
-  Future<bool> notExist(int woid) async {
+  Future<bool> notExist(int woeid) async {
     Database db = await instance.database;
     List<Map> result = await db.query(table,
-        columns: [columnWoeId], where: '$columnWoeId = ?', whereArgs: [woid]);
+        columns: [columnWoeId], where: '$columnWoeId = ?', whereArgs: [woeid]);
     if (result.length == 0) {
       return true;
     }

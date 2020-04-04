@@ -11,7 +11,7 @@ class WindWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         getMiniWeatherWidget(
             WeatherIcons.wind_direction, 'WIND', '$_windSpeed', 'km/h'),
@@ -36,15 +36,15 @@ class WindWidget extends StatelessWidget {
       children: <Widget>[
         BoxedIcon(
           icon,
-          color: Colors.blue[300],
-          size: 24,
+          color: Colors.white.withOpacity(0.3),
+          size: 22,
         ),
         SizedBox(
           height: 5,
         ),
         Text(
           title,
-          style: TextStyle(fontSize: 16, color: Colors.blue[300]),
+          style: TextStyle(fontSize: 14, color: Colors.white.withOpacity(0.3)),
         ),
         SizedBox(
           height: 5,
@@ -52,7 +52,7 @@ class WindWidget extends StatelessWidget {
         Text(
           '$value $unit',
           style: TextStyle(
-              fontSize: 20,
+              fontSize: 18,
               color: Colors.white.withOpacity(0.8),
               fontWeight: FontWeight.w600),
         )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:weather/core/model/city.dart';
 import 'package:weather/core/model/forecast_weather.dart';
 import 'package:weather/ui/menu/app_menu_drawer.dart';
 import 'package:weather/ui/menu/app_search_bar.dart';
@@ -62,7 +63,14 @@ class HomeScreen extends StatelessWidget {
                     )
                   : Column(
                       children: [
-                        WeatherDetail(activeWeather, weather.title),
+                        WeatherDetail(
+                            activeWeather,
+                            City(
+                                woeid: weather.woeid,
+                                title: weather.title,
+                                locationType: locationTypeValues
+                                    .map[weather.locationType],
+                                lattLong: weather.lattLong)),
                         Divider(
                           color: Colors.transparent,
                         ),
