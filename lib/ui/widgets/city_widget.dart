@@ -13,7 +13,7 @@ class CityWidget extends StatelessWidget {
       child: ListTile(
         leading: Icon(
           Icons.location_on,
-          color: Colors.orange[200],
+          color: Colors.white.withOpacity(0.9),
           size: 32,
         ),
         title: Text(
@@ -22,11 +22,11 @@ class CityWidget extends StatelessWidget {
         ),
         subtitle: Text(
           _city.lattLong,
-          style: TextStyle(color: Colors.black54),
+          style: TextStyle(color: Colors.black.withOpacity(0.9)),
         ),
         trailing: Icon(
           Icons.bookmark_border,
-          color: Colors.white,
+          color: Colors.white.withOpacity(0.9),
         ),
         onTap: _onTap,
       ),

@@ -14,10 +14,10 @@ class SearchCityScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-            colors: [Colors.orange[500], Colors.orange[900]],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight),
+        gradient: LinearGradient(colors: [
+          Color.fromRGBO(65, 151, 199, 1),
+          Color.fromRGBO(13, 53, 147, 1),
+        ], begin: Alignment.topLeft, end: Alignment.bottomRight),
       ),
       child: ListView.builder(
         itemBuilder: (context, index) {

@@ -17,15 +17,19 @@ class BookMarkScreen extends StatelessWidget {
       endDrawer: AppMenuDrawer(),
       appBar: AppBar(
         title: Text('Bookmarks'),
-        backgroundColor: Colors.orange[800],
-        iconTheme: new IconThemeData(color: Colors.grey[800]),
+        backgroundColor: Colors.grey[800],
+        iconTheme: new IconThemeData(color: Colors.white.withOpacity(0.9)),
       ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors: [Colors.orange[500], Colors.orange[900]],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight),
+            colors: [
+              Color.fromRGBO(65, 151, 199, 1),
+              Color.fromRGBO(13, 53, 147, 1),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
         ),
         child: ListView.builder(
           itemBuilder: (context, index) {

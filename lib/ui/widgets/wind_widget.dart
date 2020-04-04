@@ -52,7 +52,9 @@ class WindWidget extends StatelessWidget {
         Text(
           '$value $unit',
           style: TextStyle(
-              fontSize: 20, color: Colors.white, fontWeight: FontWeight.w600),
+              fontSize: 20,
+              color: Colors.white.withOpacity(0.8),
+              fontWeight: FontWeight.w600),
         )
       ],
     );

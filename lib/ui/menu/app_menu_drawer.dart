@@ -16,9 +16,8 @@ class AppMenuDrawer extends StatelessWidget {
           borderRadius: BorderRadius.horizontal(left: Radius.circular(70)),
           gradient: LinearGradient(
             colors: [
-              Colors.orange[900],
-              Colors.orange[500],
-              Colors.orange[300],
+              Color.fromRGBO(13, 53, 147, 1),
+              Colors.white,
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -48,7 +47,8 @@ class AppMenuDrawer extends StatelessWidget {
               ),
               onPressed: () async {
                 List<City> cities =
-                    await Provider.of<DatabaseHelper>(context,listen: false).queryAllRows();
+                    await Provider.of<DatabaseHelper>(context, listen: false)
+                        .queryAllRows();
                 Navigator.popAndPushNamed(context, AppRoutes.Bookmark,
                     arguments: cities);
               },
