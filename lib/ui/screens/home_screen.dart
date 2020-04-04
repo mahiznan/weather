@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:weather/core/model/forecast_weather.dart';
-import 'package:weather/ui/helper.dart';
 import 'package:weather/ui/menu/app_menu_drawer.dart';
 import 'package:weather/ui/menu/app_search_bar.dart';
 import 'package:weather/ui/providers/weather_provider.dart';
@@ -56,60 +55,48 @@ class HomeScreen extends StatelessWidget {
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                        CustomBorder(
-                          child: WeatherDetail(activeWeather, weather.title),
-                        ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * .1),
-                        CustomBorder(
-                          child: WindWidget(activeWeather.windSpeed,
-                              activeWeather.humidity, activeWeather.visibility),
-                        ),
-                        CustomBorder(
-                          child: Divider(),
-                        ),
-                        CustomBorder(
-                          child: Divider(),
-                        ),
-                        WeatherWidgetList(
-                            forecastWeather: weather, activeIndex: activeIndex),
-                        Padding(
-                            padding:
-                                EdgeInsets.only(bottom: 16, right: 16, top: 16),
-                            child: Container(
-                              // color: Colors.grey[800],
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8),
-                                    child: InkWell(
-                                      onTap: () {
-                                        Provider.of<WeatherProvider>(context,
-                                                listen: false)
-                                            .fetchForecastWeather(
-                                                weather.woeid);
-                                      },
-                                      child: Icon(
-                                        Icons.timer,
-                                        color: Colors.white,
-                                        size: 12,
-                                      ),
-                                    ),
+                : Column(children: [
+                    WeatherDetail(activeWeather, weather.title),
+                    WindWidget(activeWeather.windSpeed, activeWeather.humidity,
+                        activeWeather.visibility),
+                    Divider(
+                      color: Colors.transparent,
+                    ),
+                    Divider(),
+                    WeatherWidgetList(
+                        forecastWeather: weather, activeIndex: activeIndex),
+                    Padding(
+                        padding:
+                            EdgeInsets.only(bottom: 16, right: 16, top: 16),
+                        child: Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8),
+                                child: InkWell(
+                                  onTap: () {
+                                    Provider.of<WeatherProvider>(context,
+                                            listen: false)
+                                        .fetchForecastWeather(weather.woeid);
+                                  },
+                                  child: Icon(
+                                    Icons.timer,
+                                    color: Colors.white,
+                                    size: 12,
                                   ),
-                                  Text(
-                                    DateFormat("dd MMM hh:mm:ss a")
-                                        .format(DateTime.now()),
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 12),
-                                  ),
-                                ],
+                                ),
                               ),
-                            ))
-                      ]);
+                              Text(
+                                DateFormat("dd MMM hh:mm:ss a")
+                                    .format(DateTime.now()),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12),
+                              ),
+                            ],
+                          ),
+                        ))
+                  ]);
           }),
         ));
   }
