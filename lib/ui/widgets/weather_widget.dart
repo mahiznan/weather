@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:weather/core/model/forecast_weather.dart';
-import 'package:weather/ui/helper.dart';
 import 'package:weather/ui/providers/weather_provider.dart';
 
 class WeatherWidgetList extends StatelessWidget {
@@ -46,57 +45,55 @@ class WeatherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomBorder(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: InkWell(
-          onTap: () {
-            Provider.of<WeatherProvider>(context, listen: false).activeWeather =
-                currentIndex;
-          },
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                DateFormat("EEEE").format(forecast.applicableDate),
-                style: TextStyle(
-                    color: isActive
-                        ? Colors.white.withOpacity(0.9)
-                        : Colors.white.withOpacity(0.6),
-                    fontSize: 14,
-                    fontWeight: isActive ? FontWeight.bold : FontWeight.normal),
-              ),
-              Divider(),
-              SvgPicture.network(
-                  'https://www.metaweather.com/static/img/weather/${forecast.weatherStateAbbr}.svg',
-                  height: 38,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        onTap: () {
+          Provider.of<WeatherProvider>(context, listen: false).activeWeather =
+              currentIndex;
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              DateFormat("EEEE").format(forecast.applicableDate),
+              style: TextStyle(
                   color: isActive
                       ? Colors.white.withOpacity(0.9)
-                      : Colors.white.withOpacity(0.6)),
-              Divider(),
-              Row(
-                children: <Widget>[
-                  Text(
-                    '${forecast.theTemp}',
-                    style: TextStyle(
-                        color: isActive
-                            ? Colors.white.withOpacity(0.9)
-                            : Colors.white.withOpacity(0.6),
-                        fontSize: 14,
-                        fontWeight:
-                            isActive ? FontWeight.bold : FontWeight.normal),
+                      : Colors.white.withOpacity(0.6),
+                  fontSize: 14,
+                  fontWeight: isActive ? FontWeight.bold : FontWeight.normal),
+            ),
+            Divider(),
+            SvgPicture.network(
+                'https://www.metaweather.com/static/img/weather/${forecast.weatherStateAbbr}.svg',
+                height: 38,
+                color: isActive
+                    ? Colors.white.withOpacity(0.9)
+                    : Colors.white.withOpacity(0.6)),
+            Divider(),
+            Row(
+              children: <Widget>[
+                Text(
+                  '${forecast.theTemp}',
+                  style: TextStyle(
+                      color: isActive
+                          ? Colors.white.withOpacity(0.9)
+                          : Colors.white.withOpacity(0.6),
+                      fontSize: 14,
+                      fontWeight:
+                          isActive ? FontWeight.bold : FontWeight.normal),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Text(
+                    '\u00B0',
+                    style: TextStyle(fontSize: 14, color: Colors.white70),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16.0),
-                    child: Text(
-                      '\u00B0',
-                      style: TextStyle(fontSize: 14, color: Colors.white70),
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );

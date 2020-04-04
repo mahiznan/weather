@@ -24,7 +24,9 @@ class WeatherDetail extends StatelessWidget {
                   fontSize: 20,
                   fontWeight: FontWeight.w600),
             ),
-            Divider(),
+            Divider(
+              color: Colors.transparent,
+            ),
             Stack(
               alignment: Alignment.topRight,
               children: <Widget>[
@@ -41,7 +43,9 @@ class WeatherDetail extends StatelessWidget {
                 ),
               ],
             ),
-            Divider(),
+            Divider(
+              color: Colors.transparent,
+            ),
             MinMaxTempWidget(_weather.minTemp, _weather.maxTemp),
           ],
         ),

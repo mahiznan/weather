@@ -13,25 +13,26 @@ class BookMarkScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      endDrawer: AppMenuDrawer(),
-      appBar: AppBar(
-        title: Text('Bookmarks'),
-        backgroundColor: Colors.grey[800],
-        iconTheme: new IconThemeData(color: Colors.white.withOpacity(0.9)),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color.fromRGBO(65, 151, 199, 1),
-              Color.fromRGBO(13, 53, 147, 1),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color.fromRGBO(65, 151, 199, 1),
+            Color.fromRGBO(13, 53, 147, 1),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        child: ListView.builder(
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        endDrawer: AppMenuDrawer(),
+        appBar: AppBar(
+          title: Text('Bookmarks'),
+          backgroundColor: Colors.transparent,
+          iconTheme: new IconThemeData(color: Colors.white.withOpacity(0.9)),
+        ),
+        body: ListView.builder(
           itemBuilder: (context, index) {
             return CityWidget(_cities[index], () {
               Provider.of<WeatherProvider>(context, listen: false)
