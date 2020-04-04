@@ -11,4 +11,4 @@ Clone this repo and run command
 ## Sceenshot
 Screen 1             |  Screen 2
 :-------------------------:|:-------------------------:
-![](https://raw.githubusercontent.com/mahiznan/weather/master/screens/screen1.jpeg)  |  ![](https://github.com/mahiznan/weather/blob/master/screens/screen2.jpg)
+![](https://raw.githubusercontent.com/mahiznan/weather/master/screens/screen1.png)  |  ![](https://github.com/mahiznan/weather/blob/master/screens/screen2.png)
