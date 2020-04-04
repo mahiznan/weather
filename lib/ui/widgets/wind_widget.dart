@@ -36,7 +36,7 @@ class WindWidget extends StatelessWidget {
       children: <Widget>[
         BoxedIcon(
           icon,
-          color: Colors.white60,
+          color: Colors.blue[300],
           size: 24,
         ),
         SizedBox(
@@ -44,7 +44,7 @@ class WindWidget extends StatelessWidget {
         ),
         Text(
           title,
-          style: TextStyle(fontSize: 18, color: Colors.white54),
+          style: TextStyle(fontSize: 16, color: Colors.blue[300]),
         ),
         SizedBox(
           height: 5,
