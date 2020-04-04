@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'dart:math';
+
 class ForecastWeather {
   final List<ConsolidatedWeather> consolidatedWeather;
   final DateTime time;
@@ -81,8 +83,8 @@ class ConsolidatedWeather {
   final String windDirectionCompass;
   final DateTime created;
   final DateTime applicableDate;
-  final double minTemp;
-  final double maxTemp;
+  final int minTemp;
+  final int maxTemp;
   final int theTemp;
   final double windSpeed;
   final double windDirection;
@@ -122,16 +124,21 @@ class ConsolidatedWeather {
         windDirectionCompass: json["wind_direction_compass"],
         created: DateTime.parse(json["created"]),
         applicableDate: DateTime.parse(json["applicable_date"]),
-        minTemp: json["min_temp"].toDouble(),
-        maxTemp: json["max_temp"].toDouble(),
+        minTemp: json["min_temp"].toDouble().round(),
+        maxTemp: json["max_temp"].toDouble().round(),
         theTemp: json["the_temp"].toDouble().round(),
-        windSpeed: json["wind_speed"].toDouble(),
+        windSpeed: roundDouble(json["wind_speed"], 1),
         windDirection: json["wind_direction"].toDouble(),
         airPressure: json["air_pressure"],
         humidity: json["humidity"],
-        visibility: json["visibility"].toDouble(),
+        visibility: roundDouble(json["visibility"], 1),
         predictability: json["predictability"],
       );
+
+  static double roundDouble(double value, int places) {
+    double mod = pow(10.0, places);
+    return ((value * mod).round().toDouble() / mod);
+  }
 
   Map<String, dynamic> toJson() => {
         "id": id,
