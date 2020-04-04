@@ -14,8 +14,9 @@ void main() {
         ),
         Provider(
           create: (_) => ApiService(),
-        ),Provider(
-          create: (_)=>DatabaseHelper.instance,
+        ),
+        Provider(
+          create: (_) => DatabaseHelper.instance,
         )
       ],
       child: WeatherApp(),

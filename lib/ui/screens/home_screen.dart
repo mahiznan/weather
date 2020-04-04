@@ -59,8 +59,6 @@ class HomeScreen extends StatelessWidget {
                 : Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * .1),
                         CustomBorder(
                           child: WeatherDetail(activeWeather, weather.title),
                         ),

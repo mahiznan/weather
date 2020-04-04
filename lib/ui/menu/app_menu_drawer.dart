@@ -15,10 +15,7 @@ class AppMenuDrawer extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.horizontal(left: Radius.circular(70)),
           gradient: LinearGradient(
-            colors: [
-              Color.fromRGBO(13, 53, 147, 1),
-              Colors.white,
-            ],
+            colors: [Colors.blue[800], Colors.white],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
