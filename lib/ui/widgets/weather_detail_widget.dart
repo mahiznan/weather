@@ -14,7 +14,6 @@ class WeatherDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(_city.toJson());
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -75,7 +74,7 @@ class WeatherDetail extends StatelessWidget {
                           boxShadow: [
                             BoxShadow(
                                 blurRadius: 40.0,
-                                color: Colors.black87.withOpacity(0.5),
+                                color: Colors.black54,
                                 offset: Offset.zero),
                           ],
                         ),

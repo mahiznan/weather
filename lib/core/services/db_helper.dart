@@ -59,6 +59,16 @@ class DatabaseHelper {
           ''');
   }
 
+  Future<City> getFavoriteCity() async {
+    Database db = await instance.database;
+    List<Map> result =
+        await db.query(table, where: '$columnIsFavorite = ?', whereArgs: [1]);
+    if (result.length > 0) {
+      return City.fromJson(result[0]);
+    }
+    return null;
+  }
+
   Future<int> insertBookMark(City city) async {
     if (await notExist(city.woeid)) {
       Map<String, dynamic> row = {
