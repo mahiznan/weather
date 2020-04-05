@@ -10,12 +10,12 @@ class WeatherProvider with ChangeNotifier {
   ApiService apiService;
   WeatherProvider() {
     apiService = ApiService();
-    fetchForecastWeather(1062617);
+    //fetchForecastWeather(1062617);
   }
 
-  void fetchForecastWeather(int cityId) async {
+  void fetchForecastWeather(int woeid) async {
     busy(true);
-    apiService.fetchForecastWeather(cityId).then((weather) {
+    apiService.fetchForecastWeather(woeid).then((weather) {
       _forecastWeather = weather;
       _activeIndex = 0;
       busy(false);

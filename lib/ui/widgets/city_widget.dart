@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather/core/model/city.dart';
 import 'package:weather/ui/providers/bookmark_provider.dart';
+import 'package:weather/ui/providers/favorite_provider.dart';
 
 class CityWidget extends StatelessWidget {
   final City _city;
@@ -28,16 +29,19 @@ class CityWidget extends StatelessWidget {
             _city.lattLong,
             style: TextStyle(color: Colors.black.withOpacity(0.9)),
           ),
-          trailing: Icon(
-            Icons.favorite_border,
-            color: Colors.white.withOpacity(0.9),
-          ),
+          trailing: _city.isFavorite == 1
+              ? Icon(Icons.favorite, color: Colors.white.withOpacity(0.9))
+              : null,
           onTap: _onTap,
         ),
       ),
       onDismissed: (direction) {
         Provider.of<BookmarkProvider>(context, listen: false)
-            .updateBookMark(_city);
+            .removeBookMark(_city);
+        Provider.of<BookmarkProvider>(context, listen: false)
+            .checkBookmarkStatus(_city.woeid);
+        Provider.of<FavoriteProvider>(context, listen: false)
+            .checkFavoriteStatus(_city.woeid);
       },
     );
   }

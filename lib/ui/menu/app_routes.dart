@@ -4,8 +4,10 @@ import 'package:weather/ui/screens/bookmark_screen.dart';
 import 'package:weather/ui/screens/debug_screen.dart';
 import 'package:weather/ui/screens/home_screen.dart';
 import 'package:weather/ui/screens/sliver_screen.dart';
+import 'package:weather/ui/screens/splash_screen.dart';
 
 class AppRoutes {
+  static const String Splash = 'Splash';
   static const String Home = 'home';
   static const String Bookmark = 'bookmarks';
   static const String Sliver = 'slivers';
@@ -15,6 +17,8 @@ class AppRoutes {
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case AppRoutes.Splash:
+        return MaterialPageRoute(builder: (_) => SplashScreen());
       case AppRoutes.Home:
         return MaterialPageRoute(builder: (_) => HomeScreen());
       case AppRoutes.Bookmark:

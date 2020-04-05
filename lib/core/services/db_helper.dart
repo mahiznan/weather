@@ -6,7 +6,7 @@ import 'package:weather/core/model/city.dart';
 
 class DatabaseHelper {
   static final _databaseName = "customweather.db";
-  static final _databaseVersion = 1;
+  static final _databaseVersion = 2;
 
   static final table = 'cities';
 
@@ -14,6 +14,7 @@ class DatabaseHelper {
   static final columnTitle = 'title';
   static final columnLocationType = 'location_type';
   static final columnLattLong = 'latt_long';
+  static final columnIsFavorite = 'favorite';
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -34,9 +35,12 @@ class DatabaseHelper {
     String path = documentsDirectory.path + '/' + _databaseName;
     return await openDatabase(path,
         version: _databaseVersion, onCreate: _onCreate);
+
+    //deleteDB();
   }
 
   deleteDB() async {
+    print('Delete DB is called');
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = documentsDirectory.path + '/' + _databaseName;
     deleteDatabase(path);
@@ -49,7 +53,8 @@ class DatabaseHelper {
             $columnWoeId INTEGER PRIMARY KEY,
             $columnTitle TEXT NOT NULL,
             $columnLocationType TEXT NOT NULL,
-            $columnLattLong TEXT NOT NULL
+            $columnLattLong TEXT NOT NULL,
+            $columnIsFavorite INTEGER NOT NULL
           )
           ''');
   }
@@ -59,8 +64,10 @@ class DatabaseHelper {
       Map<String, dynamic> row = {
         DatabaseHelper.columnWoeId: city.woeid,
         DatabaseHelper.columnTitle: city.title,
-        DatabaseHelper.columnLocationType: 'City',
+        DatabaseHelper.columnLocationType:
+            locationTypeValues.reverse[city.locationType],
         DatabaseHelper.columnLattLong: city.lattLong,
+        DatabaseHelper.columnIsFavorite: 0,
       };
       Database db = await instance.database;
       return await db.insert(table, row);
@@ -68,11 +75,55 @@ class DatabaseHelper {
     return -1;
   }
 
+  Future<void> setFavoriteBookMark(City city) async {
+    Map<String, dynamic> row = {
+      DatabaseHelper.columnWoeId: city.woeid,
+      DatabaseHelper.columnTitle: city.title,
+      DatabaseHelper.columnLocationType:
+          locationTypeValues.reverse[city.locationType],
+      DatabaseHelper.columnLattLong: city.lattLong,
+      DatabaseHelper.columnIsFavorite: 1,
+    };
+    Database db = await instance.database;
+    await db.rawQuery('UPDATE $table set favorite=0');
+    if (await notExist(city.woeid)) {
+      print('Entry does not exist, so inserting');
+      db.insert(table, row);
+    } else {
+      print('Entry does exist, so updating');
+      update(row);
+    }
+  }
+
+  void removeFavoriteBookMark(City city) {
+    Map<String, dynamic> row = {
+      DatabaseHelper.columnWoeId: city.woeid,
+      DatabaseHelper.columnTitle: city.title,
+      DatabaseHelper.columnLocationType:
+          locationTypeValues.reverse[city.locationType],
+      DatabaseHelper.columnLattLong: city.lattLong,
+      DatabaseHelper.columnIsFavorite: 0,
+    };
+    update(row);
+  }
+
   Future<bool> notExist(int woeid) async {
     Database db = await instance.database;
     List<Map> result = await db.query(table,
         columns: [columnWoeId], where: '$columnWoeId = ?', whereArgs: [woeid]);
     if (result.length == 0) {
+      return true;
+    }
+    return false;
+  }
+
+  Future<bool> isFavorite(int woeid) async {
+    Database db = await instance.database;
+    List<Map> result = await db.query(table,
+        columns: [columnWoeId, columnIsFavorite],
+        where: '$columnWoeId = ? and $columnIsFavorite = ?',
+        whereArgs: [woeid, 1]);
+    if (result.length > 0) {
       return true;
     }
     return false;

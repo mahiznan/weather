@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:weather/core/model/city.dart';
 import 'package:weather/core/model/forecast_weather.dart';
 import 'package:weather/ui/providers/bookmark_provider.dart';
+import 'package:weather/ui/providers/favorite_provider.dart';
 import 'package:weather/ui/widgets/min_max_temp_widget.dart';
 
 class WeatherDetail extends StatelessWidget {
@@ -10,8 +11,10 @@ class WeatherDetail extends StatelessWidget {
   final City _city;
 
   const WeatherDetail(this._weather, this._city, {Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    print(_city.toJson());
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -22,17 +25,10 @@ class WeatherDetail extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Container(width: 32.0, height: 0.0),
-              Text(
-                _city.title.toUpperCase(),
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600),
-              ),
               Consumer<BookmarkProvider>(builder: (BuildContext context,
                   BookmarkProvider bookmarkProvider, Widget child) {
                 bool isBookmarked = bookmarkProvider.isBookmarked;
+                print('Bookmark status $isBookmarked');
                 return Container(
                   decoration: BoxDecoration(
                     boxShadow: [
@@ -50,10 +46,60 @@ class WeatherDetail extends StatelessWidget {
                             : Colors.white60,
                         size: 32.0),
                     onPressed: () {
-                      bookmarkProvider.updateBookMark(_city);
+                      if (isBookmarked) {
+                        bookmarkProvider.removeBookMark(_city);
+                        Provider.of<FavoriteProvider>(context, listen: false)
+                            .removeFavorite(_city);
+                      } else {
+                        bookmarkProvider.insertBookMark(_city);
+                      }
                     },
                   ),
                 );
+              }),
+              Text(
+                _city.title.toUpperCase(),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600),
+              ),
+              Consumer<FavoriteProvider>(builder: (BuildContext context,
+                  FavoriteProvider favoriteProvider, Widget child) {
+                bool isFavorite = favoriteProvider.isFavorite;
+                print('Favorite status $isFavorite');
+                return favoriteProvider.loading
+                    ? CircularProgressIndicator()
+                    : Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 40.0,
+                                color: Colors.black87.withOpacity(0.5),
+                                offset: Offset.zero),
+                          ],
+                        ),
+                        child: IconButton(
+                          icon: Icon(
+                              isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              color: isFavorite
+                                  ? Colors.white.withOpacity(0.9)
+                                  : Colors.white60,
+                              size: 32.0),
+                          onPressed: () {
+                            if (isFavorite) {
+                              favoriteProvider.removeFavorite(_city);
+                            } else {
+                              favoriteProvider.setFavorite(_city);
+                              Provider.of<BookmarkProvider>(context,
+                                      listen: false)
+                                  .checkBookmarkStatus(_city.woeid);
+                            }
+                          },
+                        ),
+                      );
               }),
             ],
           ),

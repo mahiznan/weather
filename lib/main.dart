@@ -5,6 +5,7 @@ import 'package:weather/core/services/api_service.dart';
 import 'package:weather/core/services/db_helper.dart';
 import 'package:weather/ui/menu/app_routes.dart';
 import 'package:weather/ui/providers/bookmark_provider.dart';
+import 'package:weather/ui/providers/favorite_provider.dart';
 import 'package:weather/ui/providers/weather_provider.dart';
 
 void main() {
@@ -18,6 +19,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (_) => BookmarkProvider(dbHelper: DatabaseHelper.instance),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => FavoriteProvider(dbHelper: DatabaseHelper.instance),
         ),
         Provider(
           create: (_) => ApiService(),
@@ -40,7 +44,7 @@ class WeatherApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: AppRoutes.Home,
+      initialRoute: AppRoutes.Splash,
       onGenerateRoute: Router.generateRoute,
     );
   }

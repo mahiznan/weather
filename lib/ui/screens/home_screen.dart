@@ -5,6 +5,8 @@ import 'package:weather/core/model/city.dart';
 import 'package:weather/core/model/forecast_weather.dart';
 import 'package:weather/ui/menu/app_menu_drawer.dart';
 import 'package:weather/ui/menu/app_search_bar.dart';
+import 'package:weather/ui/providers/bookmark_provider.dart';
+import 'package:weather/ui/providers/favorite_provider.dart';
 import 'package:weather/ui/providers/weather_provider.dart';
 import 'package:weather/ui/widgets/weather_detail_widget.dart';
 import 'package:weather/ui/widgets/weather_widget.dart';
@@ -64,13 +66,14 @@ class HomeScreen extends StatelessWidget {
                   : Column(
                       children: [
                         WeatherDetail(
-                            activeWeather,
-                            City(
-                                woeid: weather.woeid,
-                                title: weather.title,
-                                locationType: locationTypeValues
-                                    .map[weather.locationType],
-                                lattLong: weather.lattLong)),
+                          activeWeather,
+                          City(
+                              woeid: weather.woeid,
+                              title: weather.title,
+                              locationType:
+                                  locationTypeValues.map[weather.locationType],
+                              lattLong: weather.lattLong),
+                        ),
                         Divider(
                           color: Colors.transparent,
                         ),
@@ -97,6 +100,12 @@ class HomeScreen extends StatelessWidget {
                                                 listen: false)
                                             .fetchForecastWeather(
                                                 weather.woeid);
+                                        Provider.of<BookmarkProvider>(context,
+                                                listen: false)
+                                            .checkBookmarkStatus(weather.woeid);
+                                        Provider.of<FavoriteProvider>(context,
+                                                listen: false)
+                                            .checkFavoriteStatus(weather.woeid);
                                       },
                                       child: Icon(
                                         Icons.timer,

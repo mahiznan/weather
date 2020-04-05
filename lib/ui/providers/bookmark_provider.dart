@@ -9,19 +9,25 @@ class BookmarkProvider with ChangeNotifier {
 
   BookmarkProvider({@required this.dbHelper});
 
-  void updateBookMark(City city) async {
-    busy(true);
+  void insertBookMark(City city) async {
     if (await dbHelper.insertBookMark(city) > 0) {
       _isBookMarked = true;
     } else {
-      await dbHelper.delete(city.woeid);
       _isBookMarked = false;
     }
     busy(false);
   }
 
+  void removeBookMark(City city) async {
+    if (await dbHelper.delete(city.woeid) > 0) {
+      _isBookMarked = false;
+    } else {
+      _isBookMarked = true;
+    }
+    busy(false);
+  }
+
   void checkBookmarkStatus(int woeid) async {
-    busy(true);
     if (await dbHelper.notExist(woeid)) {
       _isBookMarked = false;
     } else {

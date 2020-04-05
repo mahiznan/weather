@@ -4,6 +4,7 @@ import 'package:weather/core/model/city.dart';
 import 'package:weather/ui/menu/app_menu_drawer.dart';
 import 'package:weather/ui/menu/app_routes.dart';
 import 'package:weather/ui/providers/bookmark_provider.dart';
+import 'package:weather/ui/providers/favorite_provider.dart';
 import 'package:weather/ui/providers/weather_provider.dart';
 import 'package:weather/ui/widgets/city_widget.dart';
 
@@ -40,6 +41,8 @@ class BookMarkScreen extends StatelessWidget {
                   .fetchForecastWeather(_cities[index].woeid);
               Provider.of<BookmarkProvider>(context, listen: false)
                   .checkBookmarkStatus(_cities[index].woeid);
+              Provider.of<FavoriteProvider>(context, listen: false)
+                  .checkFavoriteStatus(_cities[index].woeid);
               Navigator.pushReplacementNamed(context, AppRoutes.Home);
             });
           },
